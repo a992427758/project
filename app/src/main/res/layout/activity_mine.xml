@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ xmlns:app="http://schemas.android.com/apk/res-auto">
+
+ <TextView
+  android:id="@+id/background"
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  app:layout_constraintTop_toTopOf="@id/head_portrait"
+  app:layout_constraintBottom_toBottomOf="@id/head_portrait"
+  android:background="@drawable/shade_background"/>
+
+ <ImageView
+  android:id="@+id/head_portrait"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:scaleType="fitXY"
+  android:src="@mipmap/head_portrait"
+  app:layout_constraintTop_toTopOf="parent"
+  app:layout_constraintLeft_toLeftOf="parent"
+  android:paddingLeft="20dp"
+  android:paddingTop="30dp"
+  android:paddingBottom="30dp"/>
+
+ <TextView
+  android:id="@+id/name"
+  android:layout_width="0dp"
+  android:layout_height="0dp"
+  app:layout_constraintTop_toTopOf="@id/head_portrait"
+  app:layout_constraintBottom_toBottomOf="@id/head_portrait"
+  app:layout_constraintLeft_toRightOf="@id/head_portrait"
+  app:layout_constraintRight_toRightOf="parent"
+  android:paddingLeft="30dp"
+  android:paddingTop="30dp"
+  android:gravity="center_vertical"
+  android:textSize="18dp"
+  android:paddingBottom="30dp"
+  android:text="注册/登录"/>
+
+
+ <androidx.recyclerview.widget.RecyclerView
+  android:id="@+id/recycleView"
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  app:layout_constraintTop_toBottomOf="@id/head_portrait"
+  app:layout_constraintBottom_toBottomOf="parent"
+  android:background="#FFFFFF"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

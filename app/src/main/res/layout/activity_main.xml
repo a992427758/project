@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ xmlns:tools="http://schemas.android.com/tools"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ tools:context=".MainActivity">
+
+ <FrameLayout
+  android:id="@+id/frame_layout"
+  android:layout_width="match_parent"
+  android:layout_height="0dp"
+  app:layout_constraintBottom_toTopOf="@+id/division_line"
+  app:layout_constraintTop_toTopOf="parent"/>
+ <View
+  android:id="@+id/division_line"
+  android:layout_width="match_parent"
+  android:layout_height="1dp"
+  android:background="#000000"
+  app:layout_constraintBottom_toTopOf="@id/radio_group"
+  />
+
+ <RadioGroup
+  android:id="@+id/radio_group"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:layout_constraintBottom_toBottomOf="parent"
+  android:orientation="horizontal"
+  android:gravity="center">
+
+  <RadioButton
+   android:id="@+id/home_btn"
+   style="@style/HomeBtn"
+   android:drawableTop="@drawable/home_btn"
+   android:text="首页"/>
+
+  <RadioButton
+   android:id="@+id/video_btn"
+   style="@style/HomeBtn"
+   android:drawableTop="@drawable/video_btn"
+   android:text="视频"/>
+
+  <RadioButton
+   android:id="@+id/member_btn"
+   style="@style/HomeBtn"
+   android:drawableTop="@drawable/menber_btn"
+   android:text="会员"/>
+
+  <RadioButton
+   android:id="@+id/mine_btn"
+   style="@style/HomeBtn"
+   android:drawableTop="@drawable/mine_btn"
+   android:text="我的"/>
+ </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
