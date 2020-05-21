@@ -2,9 +2,9 @@ package com.chenjingchen.arty.ui
 
 import android.graphics.Bitmap
 import android.util.LruCache
-import androidx.core.graphics.get
 
-class MyImageLoader() {
+
+class MyImageLoader {
   private var mLruCache: LruCache<String,Bitmap>
 
   init {
