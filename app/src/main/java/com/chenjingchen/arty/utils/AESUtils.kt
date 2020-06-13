@@ -1,10 +1,11 @@
 package com.chenjingchen.arty.utils
 
-import android.annotation.SuppressLint
+
 import android.os.Build
 import android.text.TextUtils
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
+import java.util.*
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -13,10 +14,8 @@ import javax.crypto.spec.SecretKeySpec
 
 class AESUtils {
   private val SHA1PRNG = "SHA1PRNG" // SHA1PRNG 强随机种子算法, 要区别4.2以上版本的调用方法
-
   private val IV = "qws871bz73msl9x8"
   private val AES = "AES" //AES 加密
-
   private val CIPHERMODE = "AES/CBC/PKCS5Padding" //algorithm/mode/padding
 
   /**
@@ -44,7 +43,7 @@ class AESUtils {
     val raw = getRawKey(key.toByteArray())
     val skeySpec = SecretKeySpec(raw, AES)
     val cipher: Cipher = Cipher.getInstance(CIPHERMODE)
-    cipher.init(Cipher.ENCRYPT_MODE, skeySpec, IvParameterSpec(ByteArray(cipher.getBlockSize())))
+    cipher.init(Cipher.ENCRYPT_MODE, skeySpec, IvParameterSpec(ByteArray(cipher.blockSize)))
     return cipher.doFinal(clear)
   }
 
@@ -98,13 +97,13 @@ class AESUtils {
   /**
    * 对密钥进行处理
    */
-  @SuppressLint("DeletedProvider")
   @Throws(Exception::class)
   fun getRawKey(seed: ByteArray?): ByteArray {
     val kgen: KeyGenerator = KeyGenerator.getInstance(AES)
     //for android
     var sr: SecureRandom? = null
     // 在4.2以上版本中，SecureRandom获取方式发生了改变
+    //crypto 加密
     sr = if (Build.VERSION.SDK_INT >= 17) {
       SecureRandom.getInstance(SHA1PRNG, CryptoProvider())
     }
@@ -123,7 +122,7 @@ class AESUtils {
   /**
    * 二进制转字符
    */
-  fun toHex(buf: ByteArray?): String? {
+  private fun toHex(buf: ByteArray?): String? {
     if (buf == null) return ""
     val result = StringBuffer(2 * buf.size)
     for (i in buf.indices) {
@@ -142,14 +141,14 @@ class AESUtils {
    * @param buf
    * @return
    */
-  fun parseByte2HexStr(buf: ByteArray): String? {
+  private fun parseByte2HexStr(buf: ByteArray): String? {
     val sb = StringBuilder()
     for (i in buf.indices) {
       var hex = Integer.toHexString(buf[i].toInt() and 0xFF)
       if (hex.length == 1) {
         hex = "0$hex"
       }
-      sb.append(hex.toUpperCase())
+      sb.append(hex.toUpperCase(Locale.ROOT))
     }
     return sb.toString()
   }
@@ -160,8 +159,8 @@ class AESUtils {
    * @param hexStr
    * @return
    */
-  fun parseHexStr2Byte(hexStr: String): ByteArray? {
-    if (hexStr.length < 1) return null
+  private fun parseHexStr2Byte(hexStr: String): ByteArray? {
+    if (hexStr.isEmpty()) return null
     val result = ByteArray(hexStr.length / 2)
     for (i in 0 until hexStr.length / 2) {
       val high = hexStr.substring(i * 2, i * 2 + 1).toInt(16)

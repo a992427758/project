@@ -9,10 +9,10 @@ import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity(override var layout: Int = R.layout.activity_setting) : BaseActivity(),View.OnClickListener {
 
-  private var PASSWORD_STRING = "12345678"
   private var aes = AESUtils()
+  private var PASSWORD_STRING = aes.generateKey()?:"qws871bz73msl9x8"
 
-  override fun initView() {
+    override fun initView() {
     encrypt.setOnClickListener(this)
     decrypt.setOnClickListener(this)
   }

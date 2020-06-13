@@ -12,6 +12,9 @@
   android:roundIcon="@mipmap/ic_launcher_round"
   android:supportsRtl="true"
   android:theme="@style/AppTheme">
+  <meta-data
+   android:name="android.max_aspect"
+   android:value="2.4" />
   <!-- 横竖屏切换数据不重复加载 -->
   <activity android:name=".SplashActivity"
    android:configChanges="screenSize|keyboardHidden|orientation">
